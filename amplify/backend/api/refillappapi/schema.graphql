@@ -1,0 +1,10 @@
+type RefillLocation @model {
+  id: ID!
+  name: String!
+  description: String
+  streetAddress: String!
+  city: String!
+  stateProvinceOrRegion: String
+  zipCode: String!
+  countryCode: String!
+}
