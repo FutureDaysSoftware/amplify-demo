@@ -1,6 +1,6 @@
 {
 	"api": {
-		"refillappapi": {
+		"refillapi": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -9,12 +9,20 @@
 					"defaultAuthentication": {
 						"authenticationType": "API_KEY",
 						"apiKeyConfig": {
-							"description": "refillappapikey",
+							"description": "refillapikey",
 							"apiKeyExpirationDays": "365"
 						}
 					}
 				}
 			}
 		}
-	}
+	},
+	"auth": {
+		"refillapp822650e5": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"storage": {}
 }

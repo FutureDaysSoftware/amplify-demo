@@ -10,6 +10,11 @@
             "StackName": "amplify-refillapp-refillenv-152539",
             "StackId": "arn:aws:cloudformation:us-east-1:636398562320:stack/amplify-refillapp-refillenv-152539/940d1d60-744e-11ea-8077-121fa677fe9a",
             "AmplifyAppId": "d2utlbajrkmvuh"
+        },
+        "categories": {
+            "auth": {
+                "refillapp822650e5": {}
+            }
         }
     }
 }
