@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import Amplify, { graphqlOperation } from 'aws-amplify'
+import * as subscriptions from './graphql/subscriptions'
+import awsConfig from './aws-exports'
+import { Connect } from 'aws-amplify-react'
+
+// components
+import ListRefillLocations from './components/ListRefillLocations'
+
+import { listRefillLocations } from './graphql/queries'
+Amplify.configure(awsConfig)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Connect
+      query={graphqlOperation(listRefillLocations)}
+      subscription={graphqlOperation(subscriptions.onCreateRefillLocation)}
+      onSubscriptionMsg={(prev, { onCreateRefillLocation }) => {
+        console.log('Subscription data:', onCreateRefillLocation)
+        return prev
+      }}
+    >
+      {({ data: { listRefillLocations }, loading, error }) => {
+        if (error) return <h3>Error</h3>
+        if (loading || !listRefillLocations) return <h3>Loading...</h3>
+        return (
+          <ListRefillLocations
+            refillLocations={
+              listRefillLocations ? listRefillLocations.items : []
+            }
+          />
+        )
+      }}
+    </Connect>
+  )
 }
 
-export default App;
+export default App
